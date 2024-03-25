@@ -1,0 +1,44 @@
+/* login.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('pictures/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth-form {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-form .btn {
+    margin-top: 10px;
+    background-color: #007bff; /* Blue color */
+    border-color: #007bff; /* Blue color */
+}
+
+.auth-form input {
+    margin-bottom: 10px;
+}
+
+.auth-form .btn:hover {
+    filter: brightness(0.8); /* Reduce brightness on hover */
+}

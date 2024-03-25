@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting Tips</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='budget.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Budgeting Tips </h1>
+        <label class="switch">
+           
+            <span class="slider round"></span>
+        </label>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome to our Budgeting Tips section!</h2>
+            <p>Explore practical tips and advice on budgeting, saving, and managing finances effectively.</p>
+            <button id="getTipsBtn"> Click to get Budgeting Tips</button>
+            <div id="tipsContent" style="display: none;">
+                <!-- Content will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='budget.js') }}"></script>
+</body>
+</html>

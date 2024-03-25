@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Financial Goals</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='goals.css') }}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Jiorganize</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Add your navigation links here -->
+            </ul>
+            <form class="d-flex" role="search">
+                <button class="btn btn-outline-light" type="button" id="signoutbutton">Sign Out</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <button class="set-goals-btn" onclick="toggleForm()">Set Financial Goals</button>
+    <div class="goal-form" id="goalForm" style="display: none;">
+        <h2>Add New Goal</h2>
+        <form id="addGoalForm">
+            <label for="goalName">Goal Name:</label>
+            <input type="text" id="goalName" name="goalName" required>
+            <label for="goalAmount">Goal Amount :</label>
+            <input type="number" id="goalAmount" name="goalAmount" required>
+            <!-- Date input field for target date -->
+            <label for="targetDate">Target Date:</label>
+            <input type="date" id="targetDate" name="targetDate" required>
+            <!-- Add new field for priority level here -->
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <button type="submit" class="add-goal-btn">Add Goal</button>
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+    </div>
+    <ul id="goalList" class="goal-list"></ul>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Signout functionality
+    document.getElementById('signoutbutton').addEventListener('click', function() {
+        // Clear any stored user data (if any)
+        sessionStorage.removeItem("user-creds");
+        sessionStorage.removeItem("user-info");
+        // Redirect to the login page
+        window.location.href = "{{ url_for('login') }}";
+    });
+
+    // Add event listener for form submission
+    document.getElementById('addGoalForm').addEventListener('submit', addGoal);
+});
+
+function toggleForm() {
+    var goalForm = document.getElementById('goalForm');
+    goalForm.style.display = (goalForm.style.display === 'none') ? 'block' : 'none';
+}
+
+function addGoal(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    
+    // Get form data
+    const goalName = document.getElementById('goalName').value.trim();
+    const goalAmount = document.getElementById('goalAmount').value.trim();
+    
+    // Validate form data
+    if (goalName === '' || goalAmount === '') {
+        document.getElementById('errorMessage').innerText = "Please fill out all fields.";
+        return;
+    }
+
+    // Create new goal item
+    var goalList = document.getElementById('goalList');
+    var newGoalItem = document.createElement('li');
+    newGoalItem.classList.add('goal-list-item');
+    newGoalItem.innerHTML = `
+        <input type="checkbox" class="goal-checkbox">
+        <span>${goalName}: KES ${goalAmount}</span>
+        <button class="edit-goal-btn" onclick="editGoal(this)">Edit</button>
+        <button class="delete-goal-btn" onclick="deleteGoal(this)">Delete</button>
+    `;
+    goalList.appendChild(newGoalItem);
+
+    // Clear form fields and error message
+    document.getElementById('goalName').value = '';
+    document.getElementById('goalAmount').value = '';
+    document.getElementById('errorMessage').innerText = "";
+}
+
+function editGoal(btn) {
+    var listItem = btn.parentElement;
+    var goalName = listItem.querySelector('span').innerText.split(':')[0];
+    var goalAmount = listItem.querySelector('span').innerText.split(':')[1].trim().substring(4);
+    var goalNameInput = prompt("Edit Goal Name:", goalName);
+    var goalAmountInput = prompt("Edit Goal Amount :", goalAmount);
+    
+    if (goalNameInput && goalAmountInput) {
+        listItem.querySelector('span').innerText = `${goalNameInput}: KES ${goalAmountInput}`;
+    }
+}
+
+function deleteGoal(btn) {
+    var listItem = btn.parentElement;
+    listItem.remove();
+}
+</script>
+</body>
+</html>

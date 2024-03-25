@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jiorganize - Personalized Financial Analysis for  Campus Students</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='landingPage.css') }}">
+    <style>
+        /* Additional styles for enhancements */
+        .register-login-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .register-button,
+        .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-button:hover,
+        .login-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Hero image section */
+        .hero-image {
+            background-image: url('static/pictures/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px; /* Adjust as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-image h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero-image p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Jiorganize</h1>
+            
+            <p>A Personalized Financial Analysis  Tool for  Campus Students</p>
+        </div>
+    </header>
+
+    <div class="register-login-container">
+        <a  href="{{ url_for('register') }}" class="button register-button">Register</a>
+        <a  href="{{ url_for('login') }}" class="button login-button">Login</a>
+    </div>
+
+    <!-- Hero section with an image background -->
+    <section class="hero-image">
+        <div class="container">
+            <h2>Empower Your Financial Journey</h2>
+            <p>Take control of your finances with Jiorganize.
+                Je wewe umejiorganise?</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="features">
+                <div class="feature">
+                    <img src="static\pictures\insights .jpeg" alt="Feature 1">
+
+                    <h3>Personalized Insights</h3>
+                    <p>Receive tailored financial recommendations based on your spending habits and allowance.</p>
+                </div>
+                <div class="feature">
+                    <img src="static\pictures\budget .jpeg" alt="Feature 2">
+                    <h3>Budget Tracking</h3>
+                    <p>Keep track of your expenses and savings with our intuitive budgeting tools.</p>
+                </div>
+                <div class="feature">
+                    <img src="static\pictures\spending.jpg" alt="Feature 3">
+                    <h3> Spending habits</h3>
+                    <p>View your spending habits in well-designed graphs.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024. All rights reserved.</p>
+
+        </div>
+    </footer>
+
+   
+</body>
+</html>
